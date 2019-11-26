@@ -1,0 +1,65 @@
+{% extends "../wrapper.html"%}
+{% block content %}
+<form class="form-signin" method="POST">
+    <div class="headingText">Sign up with</div>
+    <div class="serviceAuth">
+      <span class="iconBox">
+        <img class="iconImg" src="https://img.icons8.com/color/48/000000/facebook.png">
+        <a class = "iconText" href="#">Facebook</a>
+      </span>
+      <span class="separatorBox">
+        <a class = "separatorText" href="#">/</a>
+      </span>
+      <span class="iconBox">
+        <img class="iconImg" src="https://img.icons8.com/color/48/000000/google-logo.png">
+        <a class = "iconText" href="#">Google</a>
+      </span>
+    </div>
+    <div class="lineSeparator">
+      <hr>
+      <div class = "lineSeparatorText">
+        <a class = "orText">or</a>
+      </div>
+    </div>
+    {% if success %}
+    Hello, {{form.first_name}}
+    {% endif %}
+    {% if errors.name %}
+      <p class = "small-text error">{{errors.name}}</p>
+    {% endif %}
+    <label for="inputFirstName" class="sr-only">First Name</label>
+    <input type="text" id="inputFirstName" class="form-control" name = "first_name" value = "{{form.first_name}}" placeholder="   &#xf2bd;      First Name" required="" autofocus="">
+    <label for="inputLastName" class="sr-only">Last Name</label>
+    <input type="text" id="inputLastName" class="form-control" name = "last_name" value = "{{form.last_name}}" placeholder="   &#xf2bd;      Last Name" required="" autofocus="">
+    <label for="inputEmail" class="sr-only">Email</label>
+    {% if errors.user or errors.email %}
+      <p class = "small-text error">{{errors.user}}{{errors.email}}</p>
+    {% endif %}
+    <input type="email" id="inputEmail" class="form-control" name = "email" value = "{{form.email}}" placeholder="   &#xf0e0;      Email" required="" autofocus="">
+    <label for="inputPassword" class="sr-only">Password</label>
+    {% if errors.confirm %}
+      <p class = "small-text error">{{errors.confirm}}</p>
+    {% endif %}
+    <input type="password" id="inputPassword" class="form-control" name = "password1" placeholder="    &#xf023;      Password" required="">
+    <label for="inputPasswordConfirm" class="sr-only">Confirm Password </label>
+    <input type="password" id="inputPasswordConfirm" class="form-control" name = "password2" placeholder="    &#xf023;      Confirm Password" required="">
+
+    <div class="checkbox">
+      <input disabled type="checkbox" id="terms" checked="checked" />
+      <label class="checkboxLabel" for="terms">
+        <span class="checkboxText">
+        I'd like to receive PlacePass news and offers
+        </span>
+      </label>
+    </div>
+    <div class="privacy">
+      <p class = "small-text">By signing up, I agree to the PlacePass <b class="termsLink">Terms of servise</b> and <b class="termsLink">Privacy policy</b> </p>
+    </div>
+  <button class="btn btn-lg btn-success btn-block submitButton" type="submit">Register</button>
+  {% csrf_token %}
+  <div class="SignIn">
+    <a class="SignInText">Already have an account?</a>
+    <button type="button" class="btn btn-outline-primary logIn">Log in</button>
+  </div>
+</form>
+{% endblock %}
