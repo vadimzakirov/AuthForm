@@ -20,14 +20,12 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 
 AUTHENTICATION_BACKENDS = (
-    ...
-    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 # Application definition
 
 INSTALLED_APPS = [
-    'social_django',
+    'sslserver',
     'AuthFormApp',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,7 +58,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
             ],
         },
     },
@@ -73,16 +70,12 @@ WSGI_APPLICATION = 'AuthFormProject.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'test_task_db',
-        'USER' : 'test_task_db_user',
-        'PASSWORD' : 'qwerty01',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 
 # Password validation

@@ -5,14 +5,20 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.validators import validate_email
 from django.core.validators import validate_slug
 from django.contrib.auth.models import  User
-
+from .social import GoogleWorker
 
 class RegistrationForm(object):
 
     def __init__(self, request):
-        self.request = request.POST
+        if request.method == 'POST':
+            self.request = request.POST
+        if request.method == 'GET':
+            self.request = request.GET
+            self.email = self.request.get('email')
+
 
     def is_valid(self):
+
         self.errors = {}
         self.email = self.request.get('email')
         self.password = self.request.get('password1')
@@ -55,6 +61,7 @@ class RegistrationForm(object):
             return True
         else:
             return False
+
 
     def create_user(self):
         new_user = User(username = self.email, password = self.password)
